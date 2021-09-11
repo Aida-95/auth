@@ -1,11 +1,15 @@
 import './App.css';
 import Router from "./Router"
+import axios from "axios"
+import { CheckPoint } from "./CheckPoint"
+
+axios.defaults.withCredentials = true
 
 function App() {
   return (
-    <div className="App">
+    <CheckPoint>
       <Router />
-    </div>
+    </CheckPoint>
   );
 }
 

@@ -82,11 +82,23 @@ const login = async (req, res) => {
 
 
 const logout = (req, res) => {
-    res.cookie('jwt', { maxAge: 1 })
-    res.redirect('/test')
+    res.cookie('jwt', "", { expires: new Date(0) }).send()
+    // res.redirect('/test')
+}
+
+const loggedIn = (req, res) => {
+    try {
+        const token = req.cookies.jwt
+        if (!token) return res.json(false)
+        const verified = jwt.verify(token, 'net ninja secret', (err, decodedToken) => { console.log(decodedToken) })
+        res.send(true)
+    } catch (error) {
+        res.json(false)
+    }
 }
 module.exports = {
     register,
     login,
-    logout
+    logout,
+    loggedIn
 }

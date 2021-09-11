@@ -5,31 +5,48 @@ import SecretPage from "./components/SecretPage"
 import Apage from "./components/Apage"
 import Register from "./components/Register"
 import Login from "./components/Login"
-import Logout from "./components/Logout"
+// import Logout from "./components/Logout"
+import CheckAuth from './CheckPoint'
+import { useContext } from "react"
+import PublicPage from "./components/PublicPage"
 
 const Router = () => {
+    const { loggedIn } = useContext(CheckAuth)
     return (
+
         <BrowserRouter>
             <Navbar />
             <Switch>
                 <Route exact path="/">
                     <Home />
                 </Route>
-                <Route path="/secretPage">
-                    <SecretPage />
+                <Route path="/publicPage">
+                    <PublicPage />
                 </Route>
-                <Route path="/aPage">
-                    <Apage />
-                </Route>
-                <Route path="/register">
-                    <Register />
-                </Route>
-                <Route path="/login">
-                    <Login />
-                </Route>
-                <Route path="/logout">
-                    <Logout />
-                </Route>
+
+
+                {loggedIn === false && (
+                    <>
+                        <Route path="/register">
+                            <Register />
+                        </Route>
+                        <Route path="/login">
+                            <Login />
+                        </Route>
+                    </>
+                )}
+
+                {loggedIn === true && (
+                    <>
+                        <Route path="/secretPage">
+                            <SecretPage />
+                        </Route>
+                        <Route path="/aPage">
+                            <Apage />
+                        </Route>
+                    </>
+                )}
+
             </Switch>
         </BrowserRouter>
     )

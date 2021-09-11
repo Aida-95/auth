@@ -1,6 +1,25 @@
+import axios from 'axios'
+import { useContext } from 'react'
+import { useHistory } from 'react-router-dom'
+import CheckAuth from '../CheckPoint'
+
 const Logout = () => {
+    const { getLoggedIn } = useContext(CheckAuth)
+
+    const history = useHistory()
+
+    const logOut = async () => {
+        await axios.get("http://localhost:5000/test/logout")
+
+        await getLoggedIn()
+        history.push('/')
+    }
+
+
     return (
-        <div><h1>Logout</h1></div>
+        <>
+            <button onClick={logOut}>Log Out</button>
+        </>
     );
 }
 

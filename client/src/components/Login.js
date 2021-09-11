@@ -1,12 +1,15 @@
 import axios from "axios"
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useHistory } from "react-router-dom"
+import CheckAuth from '../CheckPoint'
+
 
 const Login = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    const { getLoggedIn } = useContext(CheckAuth)
     const history = useHistory()
 
     const login = async (e) => {
@@ -15,7 +18,7 @@ const Login = () => {
         try {
             const LoginData = { email, password }
             await axios.post("http://localhost:5000/test/login", LoginData)
-
+            await getLoggedIn()
             history.push("/")
         } catch (error) {
             console.log(error)

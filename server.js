@@ -40,7 +40,7 @@ mongoose.connect(urldb, { useNewUrlParser: true, useUnifiedTopology: true, })
 
 //routes
 
-app.get('*', checkUser)
+// app.get('*', checkUser)
 
 
 app.get('/', csrfProtection, (req, res) => {

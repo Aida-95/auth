@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/UserModel')
 
+/*
+//old version
 const requireAuth = (req, res, next) => {
     const token = req.cookies.jwt
 
@@ -52,4 +54,24 @@ const checkUser = (req, res, next) => {
 
 module.exports = {
     requireAuth, checkUser
+} 
+*/
+
+// New Version
+
+const requireAuth = (req, res, next) => {
+    try {
+        const token = req.cookies.jwt
+        if (!token) return res.status(401).json({ errorMessage: "Unauthorized" })
+
+        const verified = jwt.verify(token, 'net ninja secret', (err, decodedToken) => { console.log(decodedToken) })
+        req.user = verified.user
+
+        next()
+    } catch (error) {
+        console.log(error)
+        res.redirect('/') // tr sa l redirectionezi catre pag de login! 
+    }
 }
+
+module.exports = { requireAuth }
