@@ -2,6 +2,7 @@ import axios from "axios"
 import { useContext, useState } from "react"
 import { useHistory } from "react-router-dom"
 import CheckAuth from '../CheckPoint'
+import './components.css'
 
 const Register = () => {
 

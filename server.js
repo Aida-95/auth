@@ -40,7 +40,7 @@ mongoose.connect(urldb, { useNewUrlParser: true, useUnifiedTopology: true, })
 
 //routes
 
-// app.get('*', checkUser)
+//app.get('*', checkUser)
 
 
 app.get('/', csrfProtection, (req, res) => {
@@ -51,4 +51,4 @@ app.get('/', csrfProtection, (req, res) => {
 })
 
 app.use('/test/secret', requireAuth, secretRouter)
-app.use('/test', router)
+app.use('/test', router, checkUser)

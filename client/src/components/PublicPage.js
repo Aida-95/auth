@@ -2,7 +2,7 @@ const PublicPage = () => {
     return (
         <div>
             <h1>
-                Public Page ieei!
+                Public Page!
             </h1>
         </div>
     );

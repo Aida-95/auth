@@ -16,6 +16,7 @@ const CheckPoint = (props) => {
         getLoggedIn()
     }, [])
 
+
     return (
         <CheckAuth.Provider value={{ loggedIn, getLoggedIn }}>
             {props.children}
